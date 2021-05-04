@@ -1,3 +1,9 @@
+<?php
+require_once "config.php";
+
+$sql = mysqli_query($conn, "SELECT * FROM user");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,63 +131,106 @@
                 <!-- End of Topbar -->
 
                 <!-- Content -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 font-weight-bold" style="color: #137F7F">Lihat Warga</h1>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr align="center">
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>NIK</th>
+                                            <th>Email</th>
+                                            <th>Nomor Hp</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php while ($warga = mysqli_fetch_assoc($sql)) : ?>
+                                            <tr>
+                                                <td align="center"><?= $i; ?></td>
+                                                <td><?= $warga['nama']; ?></td>
+                                                <td><?= $warga['nik']; ?></td>
+                                                <td><?= $warga['email']; ?></td>
+                                                <td><?= $warga['no_hp']; ?></td>
+                                                <td align="center"><a href="" class="btn btn-danger">Hapus</a></td>
+                                                <?php $i++ ?>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
 
-                <!-- End of Content -->
-
-                <!-- Footer-->
-                <footer class="footer py-2 text-center" style="color: black; font-weight:bold; background-color: rgba(100, 162, 162, 0.9);">
-                    <span>Copyright © RD2 <?= date('Y'); ?></span>
-                </footer>
-                <!-- End of footer -->
+                </div>
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+
+            <!-- End of Content -->
+
+            <!-- Footer-->
+            <footer class="footer py-2 text-center" style="color: black; font-weight:bold; background-color: rgba(100, 162, 162, 0.9);">
+                <span>Copyright © RD2 <?= date('Y'); ?></span>
+            </footer>
+            <!-- End of footer -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar ?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Tekan Logout Untuk Keluar</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="#">Logout</a>
-                    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar ?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Tekan Logout Untuk Keluar</div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="#">Logout</a>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-        <!-- Bootstrap core JavaScript-->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-        <script src="js/kirimscript.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <script src="js/kirimscript.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/datatables.js"></script>
-        <script src="js/kirimscript.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="js/datatables.js"></script>
+    <script src="js/kirimscript.js"></script>
 </body>
 
 </html>
