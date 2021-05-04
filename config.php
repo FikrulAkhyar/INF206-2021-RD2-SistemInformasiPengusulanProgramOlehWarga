@@ -1,6 +1,5 @@
 <?php
 date_default_timezone_set('Asia/Jakarta');
-error_reporting(0);
 
 $maintenance = 0; // Maintenance? 1 = ya 0 = tidak
 if ($maintenance == 1) {
