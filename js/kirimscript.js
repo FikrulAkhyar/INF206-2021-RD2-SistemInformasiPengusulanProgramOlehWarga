@@ -1,3 +1,4 @@
+            title: "Pengajuan " + flashData,
 const flashData = $('#flash').data('flashdata');
 console.log(flashData);
 
