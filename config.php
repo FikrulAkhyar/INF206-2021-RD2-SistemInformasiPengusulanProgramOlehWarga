@@ -1,6 +1,4 @@
 <?php
-// Created By Fikrul Akhyar
-// 25 April 2021
 
 date_default_timezone_set('Asia/Jakarta');
 error_reporting(0);
@@ -24,5 +22,5 @@ if (!$conn) {
 }
 
 // date & time
-$date = date("Y-m-d");
+$date = date("d-m-Y");
 $time = date("H:i:s");
