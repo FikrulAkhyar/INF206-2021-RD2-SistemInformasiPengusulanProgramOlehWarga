@@ -1,6 +1,5 @@
+    'password' => ''
 <?php
-// Created By Fikrul Akhyar
-// 25 April 2021
 
 date_default_timezone_set('Asia/Jakarta');
 error_reporting(0);

@@ -1,3 +1,4 @@
+            title: "Pengajuan " + flashData,
 const flashData = $('#flash').data('flashdata');
 console.log(flashData);
 
@@ -20,5 +21,5 @@ if (flashData) {
 }
 
 $('#vote').click(function () {
-    
+    document.getElementById('like').style.color = "#137F7F";
 });
