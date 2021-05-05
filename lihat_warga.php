@@ -230,7 +230,6 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
 
     <!-- Page level custom scripts -->
     <script src="js/datatables.js"></script>
-    <script src="js/kirimscript.js"></script>
 </body>
 
 </html>

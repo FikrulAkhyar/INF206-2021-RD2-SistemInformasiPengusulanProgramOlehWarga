@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,11 +46,16 @@
                                     <p>Welcome back! Please Signup.</p>
                                 </div>
 
+
                                 <div style="padding-left: 75px; padding-right: 75px;">
+                                    <?php if (isset($_SESSION['flashdata'])) {
+                                        echo $_SESSION['flashdata'];
+                                        $_SESSION['flashdata'] = "";
+                                    } ?>
                                     <form class="user" method="post" action="register">
                                         <div class="form-group">
-                                            <input type="tel" class="form-control form-control-user" id="nik" name="nik" placeholder="NIK" required>
-                                            <div class="invalid-feedback"></div>
+                                            <input type="tel" class="form-control form-control-user <?= (isset($_SESSION['nikErr'])) ? 'is-invalid' : 'is_valid' ?>" id="nik" name="nik" placeholder="NIK" required>
+                                            <div class="invalid-feedback"><?= $_SESSION['nikErr']; ?></div>
                                         </div>
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="nama" name="nama" placeholder="Nama Lengkap" required>
@@ -57,13 +66,13 @@
                                             <div class="invalid-feedback"></div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="tel" class="form-control form-control-user" id="nohp" name="nohp" placeholder="Nomor Hp" required>
+                                            <input type="tel" class="form-control form-control-user" id="no_hp" name="no_hp" placeholder="Nomor Hp" required>
                                             <div class="invalid-feedback"></div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="password" class="form-control form-control-user" id="password1" name="password1" placeholder="Password">
-                                                <div class="invalid-feedback"></div>
+                                                <input type="password" class="form-control form-control-user <?= (isset($_SESSION['passErr'])) ? 'is-invalid' : 'is_valid' ?>" id="password1" name="password1" placeholder="Password">
+                                                <div class="invalid-feedback"><?= $_SESSION['passErr'];; ?></div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <input type="password" class="form-control form-control-user" id="password2" name="password2" placeholder="Ulangi Password">
@@ -89,6 +98,7 @@
             </div>
         </div>
     </div>
+    <?php session_destroy(); ?>
 
     <!-- Footer-->
     <footer class="footer py-2 text-center" style="color: black; font-weight:bold; background-color: rgba(100, 162, 162, 0.9);">

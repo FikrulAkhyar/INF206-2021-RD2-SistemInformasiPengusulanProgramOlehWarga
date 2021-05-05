@@ -1,50 +1,33 @@
 <?php
-// define variables and set to empty values
-$nikErr = $namaErr = $emailErr = $nohpErr = "";
-$nik = $nama = $gender = $comment = $website = "";
+require_once "config.php";
+session_start();
 
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+$nik = htmlspecialchars($_POST["nik"]);
+$cekquery = mysqli_query($conn, "SELECT * FROM user where nik = '$nik'");
+$cekuser = mysqli_fetch_assoc($cekquery);
+
+if ($_POST["nik"] != $cekuser["nik"]) {
+    if ($_POST["password1"] == $_POST["password2"]) {
+        $nama = htmlspecialchars($_POST["nama"]);
+        $email = htmlspecialchars($_POST["email"]);
+        $image = "default.jpg";
+        $password = password_hash($_POST["nik"], PASSWORD_DEFAULT);
+        $no_hp = $_POST["no_hp"];
+        $id_status = 2;
+        $date_created = $date . " " . $time;
+
+        $insert = "INSERT INTO user VALUES ('', '$nik', '$nama', '$email', '$image', '$password', '$no_hp', '$id_status', '$date_created')";
+        if (mysqli_query($conn, $insert)) {
+            $flashdata = '<div class="alert alert-success" role="alert">Pendaftaran Akun berhasil, Silahkan Login</div>';
+            $_SESSION['flashdata'] = $flashdata;
+        } else {
+            echo "<script>alert('Gagal')</script>";
+        }
+    } else {
+        $_SESSION['passErr'] = "Password Tidak Sama";
+    }
+} else {
+    $_SESSION['nikErr'] = "NIK telah terdaftar";
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (empty($_POST["nik"])) {
-        $nikErr = "Nik Tidak Boleh Kosong";
-    } else {
-        $nik = test_input($_POST["nik"]);
-    }
-
-    if (empty($_POST["nama"])) {
-        $namaErr = "Nama Tidak Boleh Kosong";
-    } else {
-        $nama = test_input($_POST["nama"]);
-    }
-
-    if (empty($_POST["email"])) {
-        $emailErr = "Email Tidak Boleh Kosong";
-    } else {
-        $email = test_input($_POST["email"]);
-    }
-
-    if (empty($_POST["nohp"])) {
-        $nohpErr = "Nomor Hp Tidak Boleh Kosong";
-    } else {
-        $nohp = test_input($_POST["nohp"]);
-    }
-
-    if (empty($_POST["password1"])) {
-        $passwordErr = "Password Tidak Boleh Kosong";
-    } else {
-        $password = test_input($_POST["password1"]);
-    }
-
-    if ($_POST["password1"] != $_POST["password2"]) {
-        $passwordErr = "Password Tidak Sama";
-    } else {
-        $password = test_input($_POST["password1"]);
-    }
-}
+header("Location:signup");

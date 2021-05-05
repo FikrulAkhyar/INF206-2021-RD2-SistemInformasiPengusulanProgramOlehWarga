@@ -13,7 +13,7 @@ if ($maintenance == 1) {
 // database
 $config['db'] = array(
     'host' => 'localhost',
-    'name' => 'rd2',
+    'name' => 'suggestbox',
     'username' => 'root',
     'password' => ''
 );
@@ -24,5 +24,5 @@ if (!$conn) {
 }
 
 // date & time
-$date = date("d-m-Y");
+$date = date("Y-m-d");
 $time = date("H:i:s");
