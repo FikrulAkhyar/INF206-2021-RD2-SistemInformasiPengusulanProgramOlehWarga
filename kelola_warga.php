@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "config.php";
 
 $sql = mysqli_query($conn, "SELECT * FROM user");
@@ -56,8 +57,8 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item font-weight-bold" style="color: black;" href="#">Kelola Warga</a>
-                        <a class="collapse-item font-weight-bold" style="color: black;" href="$">Kelola Usulan</a>
+                        <a class="collapse-item font-weight-bold" style="color: black;" href="kelola_warga">Kelola Warga</a>
+                        <a class="collapse-item font-weight-bold" style="color: black;" href="#">Kelola Usulan</a>
                     </div>
                 </div>
             </li>
@@ -67,7 +68,7 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
 
             <!-- Nav Item - Logout Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed font-weight-bold" style="color: black;" href="#">
+                <a class="nav-link collapsed font-weight-bold" style="color: black;" href="logout">
                     <i class="fas fa-sign-out-alt" style="color: #137F7F;"></i>
                     <span>Logout</span>
                 </a>
@@ -109,7 +110,7 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -143,41 +144,41 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                    //query ke database SELECT tabel mahasiswa urut berdasarkan id yang paling besar
-                                    $sql = mysqli_query($conn, "SELECT * FROM user ORDER BY id DESC") or die(mysqli_error($conn));
-                                    //jika query diatas menghasilkan nilai > 0 maka menjalankan script di bawah if...
-                                    if(mysqli_num_rows($sql) > 0){
-                                        //membuat variabel $no untuk menyimpan nomor urut
-                                        $no = 1;
-                                        //melakukan perulangan while dengan dari dari query $sql
-                                        while($warga = mysqli_fetch_assoc($sql)){
-                                            //menampilkan data perulangan
-                                            echo '
+                                        <?php
+                                        //query ke database SELECT tabel mahasiswa urut berdasarkan id yang paling besar
+                                        $sql = mysqli_query($conn, "SELECT * FROM user ORDER BY id DESC") or die(mysqli_error($conn));
+                                        //jika query diatas menghasilkan nilai > 0 maka menjalankan script di bawah if...
+                                        if (mysqli_num_rows($sql) > 0) {
+                                            //membuat variabel $no untuk menyimpan nomor urut
+                                            $no = 1;
+                                            //melakukan perulangan while dengan dari dari query $sql
+                                            while ($warga = mysqli_fetch_assoc($sql)) {
+                                                //menampilkan data perulangan
+                                                echo '
                                             <tr align="center">
-                                                <td>'.$no.'</td>
-                                                <td>'.$warga['nama'].'</td>
-                                                <td>'.$warga['nik'].'</td>
-                                                <td>'.$warga['email'].'</td>
-                                                <td>'.$warga['no_hp'].'</td>
+                                                <td>' . $no . '</td>
+                                                <td>' . $warga['nama'] . '</td>
+                                                <td>' . $warga['nik'] . '</td>
+                                                <td>' . $warga['email'] . '</td>
+                                                <td>' . $warga['no_hp'] . '</td>
                                                 <td align="center">
-                                                    <a href="#'.$warga['id'].'" class="btn btn-info btn-sm" >detail</a>
-                                                    <a href="delete.php?id='.$warga['id'].'" class="btn btn-danger btn-sm" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
+                                                    <a href="#' . $warga['id'] . '" class="btn btn-info btn-sm" >detail</a>
+                                                    <a href="delete.php?id=' . $warga['id'] . '" class="btn btn-danger btn-sm" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
                                                 </td>
                                             </tr>
                                             ';
-                                            $no++;
-                                        }
-                                    //jika query menghasilkan nilai 0
-                                    }else{
-                                        echo '
+                                                $no++;
+                                            }
+                                            //jika query menghasilkan nilai 0
+                                        } else {
+                                            echo '
                                         <tr>
                                             <td colspan="6">Tidak ada data.</td>
                                         </tr>
                                         ';
-                                    }
-                                    ?>
-                                    </tbody> 
+                                        }
+                                        ?>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -221,7 +222,7 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                 <div class="modal-body">Tekan Logout Untuk Keluar</div>
                 <div class="modal-footer">
                     <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="#">Logout</a>
+                    <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="logout">Logout</a>
                 </div>
             </div>
         </div>
