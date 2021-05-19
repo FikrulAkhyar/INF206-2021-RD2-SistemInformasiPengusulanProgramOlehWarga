@@ -50,10 +50,7 @@ session_start();
                                 <div style="padding-left: 75px; padding-right: 75px;">
                                     <?php if (isset($_SESSION['flashdata'])) {
                                         echo $_SESSION['flashdata'];
-<<<<<<< HEAD
                                         $_SESSION['flashdata'] = "";
-=======
->>>>>>> main
                                     } ?>
                                     <form class="user" method="post" action="register">
                                         <div class="form-group">
@@ -90,11 +87,7 @@ session_start();
                                 </div>
                                 <hr>
                                 <div class="text-center">
-<<<<<<< HEAD
-                                    <a class="small font-weight-bold" style="color:#137F7F" href="#">Sudah Punya Akun? Login</a>
-=======
                                     <a class="small font-weight-bold" style="color:#137F7F" href="login">Sudah Punya Akun? Login</a>
->>>>>>> main
                                 </div>
                             </div>
                         </div>

@@ -11,11 +11,7 @@ if ($_POST["nik"] != $cekuser["nik"]) {
         $nama = htmlspecialchars($_POST["nama"]);
         $email = htmlspecialchars($_POST["email"]);
         $image = "default.jpg";
-<<<<<<< HEAD
-        $password = password_hash($_POST["nik"], PASSWORD_DEFAULT);
-=======
         $password = password_hash($_POST["password1"], PASSWORD_DEFAULT);
->>>>>>> main
         $no_hp = $_POST["no_hp"];
         $id_status = 2;
         $date_created = $date . " " . $time;
