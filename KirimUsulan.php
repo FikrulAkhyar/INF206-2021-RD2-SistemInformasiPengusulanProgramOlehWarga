@@ -1,19 +1,17 @@
 <?php 
 include "config.php";
-session_start();
 
-$id_user = $_SESSION["id"]; 
+$id_user = 22; 
 $judul = $_POST['judul'];
 $deskripsi = $_POST['deskripsi'];
 $vote = 0;
 
 
 if(mysqli_query($conn, "INSERT INTO usulan VALUES('', '$id_user','$judul', '$deskripsi', '$vote')")) { 
-    $popup = "Success";
-    $_SESSION['popup'] = $popup;
+    echo"<script>alert('OKEE')</script>";
 } else {
-    $popup = "Warning";
-    $_SESSION['popup'] = $popup;
+    echo"<script>alert('XXXX')</script>";
+    die("Koneksi Gagal : " . mysqli_error($conn));
 }
 
 header("location:Usulan.php");
