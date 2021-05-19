@@ -20,5 +20,9 @@ if (flashData) {
 }
 
 $('#vote').click(function () {
+<<<<<<< HEAD
     
+=======
+    document.getElementById('like').style.color = "#137F7F";
+>>>>>>> main
 });

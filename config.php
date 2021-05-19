@@ -1,6 +1,9 @@
 <?php
+<<<<<<< HEAD
 // Created By Fikrul Akhyar
 // 25 April 2021
+=======
+>>>>>>> main
 
 date_default_timezone_set('Asia/Jakarta');
 error_reporting(0);
@@ -24,5 +27,9 @@ if (!$conn) {
 }
 
 // date & time
+<<<<<<< HEAD
 $date = date("Y-m-d");
+=======
+$date = date("d-m-Y");
+>>>>>>> main
 $time = date("H:i:s");
