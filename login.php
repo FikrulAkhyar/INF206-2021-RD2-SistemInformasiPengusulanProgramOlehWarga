@@ -53,16 +53,20 @@ require 'config.php'; ?>
 
                                     <form class="user" method="post" action="loginproses">
                                         <div class="form-group">
-                                            <input type="tel" class="form-control form-control-user <?= (isset($_SESSION['nikErr'])) ? 'is-invalid' : 'is_valid' ?>" id="nik" name="nik" placeholder="NIK">
+                                            <input type="tel" class="form-control form-control-user <?= (isset($_SESSION['nikErr'])) ? 'is-invalid' : 'is_valid' ?>" id="nik" value="<?php if (isset($_COOKIE["user_login"])) {
+                                                                                                                                                                                            echo $_COOKIE["user_login"];
+                                                                                                                                                                                        } ?>" name="nik" placeholder="NIK">
                                             <div class="invalid-feedback"><?= $_SESSION['nikErr']; ?></div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user <?= (isset($_SESSION['passErr'])) ? 'is-invalid' : 'is_valid' ?>" id="password" name="password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user <?= (isset($_SESSION['passErr'])) ? 'is-invalid' : 'is_valid' ?>" id="password" value="<?php if (isset($_COOKIE["userpassword"])) {
+                                                                                                                                                                                                    echo $_COOKIE["userpassword"];
+                                                                                                                                                                                                } ?>" name="password" placeholder="Password">
                                             <div class="invalid-feedback"><?= $_SESSION['passErr'];; ?></div>
                                         </div>
                                         <div class="form-group" style="display: flex; justify-content:space-between;">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember" id="remember" <?php if (isset($_COOKIE["user_login"])) { ?> checked <?php } ?>>
                                                 <label class="custom-control-label  font-weight-bold" for="customCheck" style="color: #137F7F">Remember
                                                     Me</label>
                                             </div>
