@@ -27,6 +27,18 @@ if ($cek > 0) {
 		$_SESSION["id_status"] = $id_status_user;
 		$_SESSION["name"] = $name_user;
 
+		if (!empty($_POST["remember"])) {
+			setcookie("user_login", $_POST["nik"], time() + (10 * 365 * 24 * 60 * 60));
+			setcookie("userpassword", $_POST["password"], time() + (10 * 365 * 24 * 60 * 60));
+		} else {
+			if (isset($_COOKIE["user_login"])) {
+				setcookie("user_login", "");
+			}
+			if (isset($_COOKIE["userpassword"])) {
+				setcookie("userpassword", "");
+			}
+		}
+
 		header("location: dashboard");
 	} else {
 		$_SESSION['message'] = '<div class="alert alert-danger" role="alert">Login Gagal / Password Salah</div>';
