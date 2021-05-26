@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once "config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,6 +102,26 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <div class="topbar-divider d-none d-sm-block"></div>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION["name"]; ?></span>
+                                <img class="img-profile rounded-circle" src="img/profile/default.jpg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="logout" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
                 </nav>
                 <!-- End of Topbar -->
 
@@ -127,6 +152,24 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
+
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar ?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Tekan Logout Untuk Keluar</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <!-- Bootstrap core JavaScript-->
