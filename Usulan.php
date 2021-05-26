@@ -51,7 +51,7 @@
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item font-weight-bold" style="color: black;" href="KirimUsulan.php">Kirim Pengajuan</a>
+            <a class="collapse-item font-weight-bold" style="color: black;" href="kirim_usulan.php">Kirim Pengajuan</a>
             <a class="collapse-item font-weight-bold" style="color: black;" href="#">Riwayat Pengajuan</a>
         </div>
     </div>
@@ -137,7 +137,7 @@
         </div>
         <div class="m-auto" style="width: 350px; height: 400px;">
 
-            <form method="post" action="KirimUsulan.php">
+            <form method="post" action="kirim_usulan.php">
                 <div class="form-group">
                     <label for="nama">Nama</label>
                     <input class="form-control border border-info" type="text" id="nama" name="nama" placeholder="Mauriza" readonly>
