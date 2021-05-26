@@ -63,7 +63,7 @@
 
             <!-- Nav Item - Peringkat Program Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed font-weight-bold" style="color: black;" href="#">
+                <a class="nav-link collapsed font-weight-bold" style="color: black;" href="peringkat_program.php">
                     <i class="far fa-star" style="color: #137F7F;"></i>
                     <span>Peringkat Program</span>
                 </a>
