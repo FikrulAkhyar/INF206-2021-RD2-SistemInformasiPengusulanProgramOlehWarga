@@ -1,8 +1,8 @@
 <?php
 session_start();
+include 'server.php';
 require_once "config.php";
-
-$sql = mysqli_query($conn, "SELECT * FROM user");
+$query = mysqli_query($conn, 'SELECT a.*, b.nama FROM usulan as a JOIN user as b ON a.id_user = b.id');
 ?>
 
 <!DOCTYPE html>
@@ -16,12 +16,14 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SuggestBox</title>
+    <title>Kirim Usulan</title>
+
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <!-- Custom styles for this page -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
@@ -53,18 +55,27 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
             <li class="nav-item">
                 <a class="nav-link collapsed font-weight-bold" style="color: black; " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="far fa-paper-plane" style="color: #137F7F;"></i>
-                    <span>Menu Admin</span>
+                    <span>Pengajuan Program</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item font-weight-bold" style="color: black;" href="kelola_warga">Kelola Warga</a>
-                        <a class="collapse-item font-weight-bold" style="color: black;" href="#">Kelola Usulan</a>
+                        <a class="collapse-item font-weight-bold" style="color: black;" href="Usulan.php">Kirim Pengajuan</a>
+                        <a class="collapse-item font-weight-bold" style="color: black;" href="#">Riwayat Pengajuan</a>
                     </div>
                 </div>
             </li>
 
             <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
 
+            <!-- Nav Item - Peringkat Program Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed font-weight-bold" style="color: black;" href="peringkat_program.php">
+                    <i class="far fa-star" style="color: #137F7F;"></i>
+                    <span>Peringkat Program</span>
+                </a>
+            </li>
+
+            <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
 
             <!-- Nav Item - Logout Menu -->
             <li class="nav-item">
@@ -105,7 +116,7 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">User Admin</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION["name"]; ?></span>
                                 <img class="img-profile rounded-circle" src="img/profile/default.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -122,75 +133,84 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Content -->
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+<div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 font-weight-bold" style="color: #137F7F">Kelola Warga</h1>
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr align="center">
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>NIK</th>
-                                            <th>Email</th>
-                                            <th>Nomor Hp</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        //query ke database SELECT tabel mahasiswa urut berdasarkan id yang paling besar
-                                        $sql = mysqli_query($conn, "SELECT * FROM user ORDER BY id DESC") or die(mysqli_error($conn));
-                                        //jika query diatas menghasilkan nilai > 0 maka menjalankan script di bawah if...
-                                        if (mysqli_num_rows($sql) > 0) {
-                                            //membuat variabel $no untuk menyimpan nomor urut
-                                            $no = 1;
-                                            //melakukan perulangan while dengan dari dari query $sql
-                                            while ($warga = mysqli_fetch_assoc($sql)) {
-                                                //menampilkan data perulangan
-                                                echo '
-                                            <tr align="center">
-                                                <td>' . $no . '</td>
-                                                <td>' . $warga['nama'] . '</td>
-                                                <td>' . $warga['nik'] . '</td>
-                                                <td>' . $warga['email'] . '</td>
-                                                <td>' . $warga['no_hp'] . '</td>
-                                                <td align="center">
-                                                    <a href="#' . $warga['id'] . '" class="btn btn-info btn-sm" >detail</a>
-                                                    <a href="delete.php?id=' . $warga['id'] . '" class="btn btn-danger btn-sm" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
-                                                </td>
-                                            </tr>
-                                            ';
-                                                $no++;
-                                            }
-                                            //jika query menghasilkan nilai 0
-                                        } else {
-                                            echo '
-                                        <tr>
-                                            <td colspan="6">Tidak ada data.</td>
-                                        </tr>
-                                        ';
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+<!-- Page Heading -->
+<h1 class="h3 mb-4 font-weight-bold" style="color: #137F7F">Peringkat Program</h1>
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr align="center">
+                        <th>No</th>
+                        <th>Nama Pengusul</th>
+                        <th>Judul</th>
+                        <th>Deskripsi</th>
+                        <th>Jumlah Vote</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    $no = 1;
+                    while ($data = mysqli_fetch_array($query)) {
+                        ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $data['nama']; ?></td>
+                                <td><?= $data['judul']; ?></td>
+                                <td><?= $data['deskripsi']; ?></td>
+                                <td id="rating" align="center"><?= $data['jumlah_vote']; ?><i class="fas fa-heart ml-1" style="color: red;"></i></td>
+                                <td align="center"><button class="btn border-0" type="button" id="vote" class="vote" data-toggle="modal" data-target="#like-modal" onclick="document.getElementById('like').style.color = '#137F7F';"><i id="like" class="fas fa-thumbs-up"></i></button>
+                                </td>
+                            </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="like-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Anda Melakukan Voting</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah Anda Yakin Melakukan Voting?
+                                </div>
+                                <div class="modal-footer">
+                                    <form>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Vote</button>
+                                    </form>
+                                </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            </div>
+                        <?php } ?>
+                    <!-- for ($i = 0; $i < $count; $i++) : ?>
+                        <tr>
+                            <td align="center"><?= $usulan[$i]['id']; ?></td>
+                            <td><?= $usulan[$i]['nama']; ?></td>
+                            <td><?= $usulan[$i]['judul']; ?></td>
+                            <td><?= $usulan[$i]['deskripsi']; ?></td>
+                            <td align="center"><?= $usulan[$i]['jumlah_vote']; ?><i class="fas fa-heart ml-1" style="color: red;"></i></td>
+                            <td align="center"><button class="btn border-0" type="button" id="vote" class="vote" onclick="document.getElementById('like').style.color = '#137F7F';"><i id="like" class="fas fa-thumbs-up"></i></button></td>
+                        </tr> -->
+                    <?//php endfor; ?> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-                </div>
-                <!-- /.container-fluid -->
+</div>
+<!-- /.container-fluid -->
 
-            </div>
-            <!-- End of Main Content -->
-
-            <!-- End of Content -->
+</div>
+<!-- End of Main Content -->
 
             <!-- Footer-->
             <footer class="footer py-2 text-center" style="color: black; font-weight:bold; background-color: rgba(100, 162, 162, 0.9);">
@@ -227,24 +247,18 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
             </div>
         </div>
     </div>
-
+    
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- Bootstrap core JavaScript-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    <!-- Bootstrap core JavaScript-->
     <script src="js/kirimscript.js"></script>
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/datatables.js"></script>
-    <script src="js/kirimscript.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/vote.js"></script>
 </body>
 
 </html>
