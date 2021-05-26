@@ -17,6 +17,7 @@ if ($cek > 0) {
 	$nik_user = $row[0];
 	$pass_user = $row[5];
 	$name_user = $row[2];
+	$no_hp_user = $row[6];
 	$id_status_user = $row[7];
 	$id_user = $row[0];
 
@@ -26,6 +27,8 @@ if ($cek > 0) {
 		$_SESSION["nik"] = $nik_user;
 		$_SESSION["id_status"] = $id_status_user;
 		$_SESSION["name"] = $name_user;
+		$_SESSION["no_hp"] = $no_hp_user;
+
 
 		header("location: dashboard");
 	} else {

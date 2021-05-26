@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start();
+var_dump($_SESSION['id']);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -142,11 +144,11 @@
                             <form method="post" action="KirimUsulan.php">
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input class="form-control border border-info" type="text" id="nama" name="nama" placeholder="<?= $_SESSION["name"]; ?>" readonly>
+                                    <input class="form-control border border-info" type="text" id="nama" name="nama" value="<?= $_SESSION["name"]; ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="nohp">No HP</label>
-                                    <input class="form-control border border-info" id="nohp" type="text" name="nohp" placeholder="08XXXXXXXX" readonly>
+                                    <input class="form-control border border-info" id="nohp" type="text" name="nohp" value="<?= $_SESSION['no_hp']; ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="judul">Judul</label>
