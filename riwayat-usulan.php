@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once "config.php";
+$id_user = $_SESSION['id'];
+$query = mysqli_query($conn, "SELECT * FROM usulan WHERE id_user = '$id_user'");
+
 ?>
 
 <!DOCTYPE html>
@@ -27,66 +30,122 @@ require_once "config.php";
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-white sidebar sidebar-dark accordion" id="accordionSidebar" style="border: 1px solid #137F7F;">
+        <?php if ($_SESSION["id_status"] == 1) : ?>
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-white sidebar sidebar-dark accordion" id="accordionSidebar" style="border: 1px solid #137F7F;">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-                <img src="img/logo.png" width="90%;">
-            </a>
-
-            <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link font-weight-bold" style="color: black;" href="#">
-                    <i class="fas fa-home" style="color: #137F7F;"></i>
-                    <span>Menu Utama</span></a>
-            </li>
-
-            <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
-
-            <!-- Nav Item - Pengajuan Program Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed font-weight-bold" style="color: black; " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="far fa-paper-plane" style="color: #137F7F;"></i>
-                    <span>Pengajuan Program</span>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                    <img src="img/logo.png" width="90%;">
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item font-weight-bold" style="color: black;" href="Usulan">Kirim Pengajuan</a>
-                        <a class="collapse-item font-weight-bold" style="color: black;" href="#">Riwayat Pengajuan</a>
+
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" style="color: black;" href="#">
+                        <i class="fas fa-home" style="color: #137F7F;"></i>
+                        <span>Menu Utama</span></a>
+                </li>
+
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+
+                <!-- Nav Item - Pengajuan Program Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed font-weight-bold" style="color: black; " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="far fa-paper-plane" style="color: #137F7F;"></i>
+                        <span>Menu Admin</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item font-weight-bold" style="color: black;" href="kelola_warga">Kelola Warga</a>
+                            <a class="collapse-item font-weight-bold" style="color: black;" href="#">Kelola Usulan</a>
+                        </div>
                     </div>
+                </li>
+
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+
+
+                <!-- Nav Item - Logout Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed font-weight-bold" style="color: black;" href="logout">
+                        <i class="fas fa-sign-out-alt" style="color: #137F7F;"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" style="background-color: #137F7F;" id="sidebarToggle"></button>
                 </div>
-            </li>
 
-            <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
-            <li class="nav-item">
-                <a class="nav-link font-weight-bold" style="color: black;" href="#">
-                    <i class="fas fa-home" style="color: #137F7F;"></i>
-                    <span>Peringkat Program</span></a>
-            </li>
+            </ul>
+            <!-- End of Sidebar -->
+        <?php else : ?>
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-white sidebar sidebar-dark accordion" id="accordionSidebar" style="border: 1px solid #137F7F;">
 
-            <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
-
-
-            <!-- Nav Item - Logout Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed font-weight-bold" style="color: black;" href="#">
-                    <i class="fas fa-sign-out-alt" style="color: #137F7F;"></i>
-                    <span>Logout</span>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                    <img src="img/logo.png" width="90%;">
                 </a>
-            </li>
 
-            <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
 
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" style="background-color: #137F7F;" id="sidebarToggle"></button>
-            </div>
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" style="color: black;" href="#">
+                        <i class="fas fa-home" style="color: #137F7F;"></i>
+                        <span>Menu Utama</span></a>
+                </li>
 
-        </ul>
-        <!-- End of Sidebar -->
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+
+                <!-- Nav Item - Pengajuan Program Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed font-weight-bold" style="color: black; " href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="far fa-paper-plane" style="color: #137F7F;"></i>
+                        <span>Pengajuan Program</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <a class="collapse-item font-weight-bold" style="color: black;" href="Usulan">Kirim Pengajuan</a>
+                            <a class="collapse-item font-weight-bold" style="color: black;" href="#">Riwayat Pengajuan</a>
+                        </div>
+                    </div>
+                </li>
+
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" style="color: black;" href="#">
+                        <i class="fas fa-home" style="color: #137F7F;"></i>
+                        <span>Peringkat Program</span></a>
+                </li>
+
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+
+
+                <!-- Nav Item - Logout Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed font-weight-bold" style="color: black;" href="#">
+                        <i class="fas fa-sign-out-alt" style="color: #137F7F;"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" style="background-color: #137F7F;" id="sidebarToggle"></button>
+                </div>
+
+            </ul>
+            <!-- End of Sidebar -->
+        <?php endif; ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -122,6 +181,7 @@ require_once "config.php";
                         </li>
 
                     </ul>
+
                 </nav>
                 <!-- End of Topbar -->
 
@@ -132,63 +192,92 @@ require_once "config.php";
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 font-weight-bold" style="color: #137F7F">Riwayat Pengajuan Usulan</h1>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Judul</th>
+                                            <th>Deskripsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        while ($data = mysqli_fetch_array($query)) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $no++; ?></td>
+                                                <td><?= $data['judul']; ?></td>
+                                                <td><?= $data['deskripsi']; ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- /.container-fluid -->
-            </div>
-            <!-- End of Main Content -->
 
-            <!-- Footer-->
-            <footer class="footer py-2 text-center" style="color: black; font-weight:bold; background-color: rgba(100, 162, 162, 0.9);">
-                <span>Copyright © RD2 <?= date('Y'); ?></span>
-            </footer>
-            <!-- End of footer -->
+                <!-- End of Main Content -->
+                <!-- Footer-->
+                <footer class="footer py-2 text-center" style="color: black; font-weight:bold; background-color: rgba(100, 162, 162, 0.9);">
+                    <span>Copyright © RD2 <?= date('Y'); ?></span>
+                </footer>
+                <!-- End of footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar ?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Tekan Logout Untuk Keluar</div>
-                <div class="modal-footer">
-                    <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="logout">Logout</a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar ?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Tekan Logout Untuk Keluar</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="logout">Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-    <script src="js/kirimscript.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+        <script src="js/kirimscript.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/datatables.js"></script>
-    <script src="js/kirimscript.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="js/datatables.js"></script>
+        <script src="js/kirimscript.js"></script>
     </div>
 </body>
 
