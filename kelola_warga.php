@@ -138,8 +138,6 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>NIK</th>
-                                            <th>Email</th>
-                                            <th>Nomor Hp</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -152,22 +150,52 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                                             //membuat variabel $no untuk menyimpan nomor urut
                                             $no = 1;
                                             //melakukan perulangan while dengan dari dari query $sql
-                                            while ($warga = $sql->fetch_assoc()) {
+                                            while ($warga = mysqli_fetch_assoc($sql)) {
                                                 //menampilkan data perulangan
                                                 echo '
                                             <tr align="center">
                                                 <td>' . $no . '</td>
                                                 <td>' . $warga['nama'] . '</td>
                                                 <td>' . $warga['nik'] . '</td>
-                                                <td>' . $warga['email'] . '</td>
-                                                <td>' . $warga['no_hp'] . '</td>
-                                                
                                                 <td align="center">
-                                                    <button type="button" class="btn-primary btn-sm" data-toggle="modal" id="'.$warga['id'].'" data-target="#show">detail</button>
-                                                    <a href="delete.php?id=' . $warga['id'] . '" class="btn btn-danger btn-sm" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detail">Detail</button>
+                                                    <a href="delete.php?id=' . $warga['id'] . '" onclick="return confirm(\'Yakin ingin menghapus data ini?\')"><button type="button" class="btn btn-danger">Delete</button></a>
                                                 </td>
                                             </tr>
                                             ';
+                                                echo '<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLongTitle">Detail Warga</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body mx-5">
+                                                <div class="form-group">
+                                                <label for="nik">NIK</label>
+                                                <input type="text" class="form-control" id="nik" value="' . $warga['nik'] . '" readonly>
+                                              </div>
+                                                <div class="form-group">
+                                                <label for="nama">Nama</label>
+                                                <input type="text" class="form-control" id="nama" value="' . $warga['nama'] . '" readonly>
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input type="text" class="form-control" id="email" value="' . $warga['email'] . '" readonly>
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="no_hp">Nomor HP</label>
+                                                <input type="text" class="form-control" id="no_hp" value="' . $warga['no_hp'] . '" readonly>
+                                              </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>';
                                                 $no++;
                                             }
                                             //jika query menghasilkan nilai 0
@@ -183,25 +211,8 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                                 </table>
                             </div>
                         </div>
-
-                        <!-- Modal start here -->
-                            <div class="modal fade" id="show" role="dialog">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title"><b>Detail Warga</b></h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="modal-data"></div>
-                                            </div>
-                                        </div>
-                                </div>
-                            </div>
-                        <!-- End of Modal -->
-                        
-
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -260,34 +271,9 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
     <script src="vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <script src="<?=$base_url;?>js/jquery-2.2.3.min.js"></script>
-    <script src="<?=$base_url;?>js/bootstrap.min.js"></script>
-
     <!-- Page level custom scripts -->
     <script src="js/datatables.js"></script>
     <script src="js/kirimscript.js"></script>
-
-    <!-- Ini merupakan script yang terpenting -->
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#show').on('show.bs.modal', function (e) {
-                var getDetail = $(e.relatedTarget).data('id');
-                /* fungsi AJAX untuk melakukan fetch data */
-                $.ajax({
-                    type : 'post',
-                    url : 'detail.php',
-                    /* detail per identifier ditampung pada berkas detail.php yang berada di folder application/view */
-                    data :  'getDetail='+ getDetail,
-                    /* memanggil fungsi getDetail dan mengirimkannya */
-                    success : function(data){
-                    $('.modal-data').html(data);
-                    /* menampilkan data dalam bentuk dokumen HTML */
-                    }
-                });
-            });
-        });
-    </script>
-
 </body>
 
 </html>
