@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once "config.php";
+$id_user = $_SESSION['id'];
+$query = mysqli_query($conn, "SELECT * FROM usulan WHERE id_user = '$id_user'");
 ?>
 
 <!DOCTYPE html>
@@ -132,6 +134,35 @@ require_once "config.php";
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 font-weight-bold" style="color: #137F7F">Riwayat Pengajuan Usulan</h1>
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Judul</th>
+                                            <th>Deskripsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $no = 1;
+                                        while ($data = mysqli_fetch_array($query)) {
+                                        ?>
+                                            <tr>
+                                                <td><?= $no++; ?></td>
+                                                <td><?= $data['judul']; ?></td>
+                                                <td><?= $data['deskripsi']; ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!-- /.container-fluid -->
             </div>
