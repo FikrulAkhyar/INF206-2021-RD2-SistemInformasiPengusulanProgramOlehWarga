@@ -58,7 +58,7 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item font-weight-bold" style="color: black;" href="kelola_warga">Kelola Warga</a>
-                        <a class="collapse-item font-weight-bold" style="color: black;" href="#">Kelola Usulan</a>
+                        <a class="collapse-item font-weight-bold" style="color: black;" href="lihat_usulan">Kelola Usulan</a>
                     </div>
                 </div>
             </li>
@@ -138,8 +138,6 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>NIK</th>
-                                            <th>Email</th>
-                                            <th>Nomor Hp</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -159,14 +157,45 @@ $sql = mysqli_query($conn, "SELECT * FROM user");
                                                 <td>' . $no . '</td>
                                                 <td>' . $warga['nama'] . '</td>
                                                 <td>' . $warga['nik'] . '</td>
-                                                <td>' . $warga['email'] . '</td>
-                                                <td>' . $warga['no_hp'] . '</td>
                                                 <td align="center">
-                                                    <a href="#' . $warga['id'] . '" class="btn btn-info btn-sm" >detail</a>
-                                                    <a href="delete.php?id=' . $warga['id'] . '" class="btn btn-danger btn-sm" onclick="return confirm(\'Yakin ingin menghapus data ini?\')">Delete</a>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detail">Detail</button>
+                                                    <a href="delete.php?id=' . $warga['id'] . '" onclick="return confirm(\'Yakin ingin menghapus data ini?\')"><button type="button" class="btn btn-danger">Delete</button></a>
                                                 </td>
                                             </tr>
                                             ';
+                                                echo '<div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h5 class="modal-title" id="exampleModalLongTitle">Detail Warga</h5>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body mx-5">
+                                                <div class="form-group">
+                                                <label for="nik">NIK</label>
+                                                <input type="text" class="form-control" id="nik" value="' . $warga['nik'] . '" readonly>
+                                              </div>
+                                                <div class="form-group">
+                                                <label for="nama">Nama</label>
+                                                <input type="text" class="form-control" id="nama" value="' . $warga['nama'] . '" readonly>
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input type="text" class="form-control" id="email" value="' . $warga['email'] . '" readonly>
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="no_hp">Nomor HP</label>
+                                                <input type="text" class="form-control" id="no_hp" value="' . $warga['no_hp'] . '" readonly>
+                                              </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>';
                                                 $no++;
                                             }
                                             //jika query menghasilkan nilai 0
