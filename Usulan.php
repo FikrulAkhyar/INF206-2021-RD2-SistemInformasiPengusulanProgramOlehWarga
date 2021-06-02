@@ -59,3 +59,5 @@ include_once "topbar.php";
 
 </div>
 <!-- End of Main Content -->
+
+<?php include_once "footer.php"; ?>
