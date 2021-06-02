@@ -35,3 +35,16 @@ if (isset($_POST['action'])) {
     echo getRating($post_id);
     exit(0);
 }
+
+// Get total number of likes for a particular post
+function getLikes($id)
+{
+    global $conn;
+    $sql = "SELECT COUNT(*) FROM rating_info 
+  		  WHERE post_id = $id AND rating_action='like'";
+    $rs = mysqli_query($conn, $sql);
+    $result = mysqli_fetch_array($rs);
+    $sql2 = "UPDATE usulan SET jumlah_vote = '$result[0]' WHERE id = $id";
+    mysqli_query($conn, $sql2);
+    return $result[0];
+}
