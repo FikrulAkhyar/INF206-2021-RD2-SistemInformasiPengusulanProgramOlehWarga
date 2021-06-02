@@ -48,3 +48,37 @@ function getLikes($id)
     mysqli_query($conn, $sql2);
     return $result[0];
 }
+
+// Get total number of likes and dislikes for a particular post
+function getRating($id)
+{
+    global $conn;
+    $rating = array();
+    $likes_query = "SELECT COUNT(*) FROM rating_info WHERE post_id = $id AND rating_action='like'";
+    $dislikes_query = "SELECT COUNT(*) FROM rating_info 
+		  			WHERE post_id = $id AND rating_action='dislike'";
+    $likes_rs = mysqli_query($conn, $likes_query);
+    $dislikes_rs = mysqli_query($conn, $dislikes_query);
+    $likes = mysqli_fetch_array($likes_rs);
+    $dislikes = mysqli_fetch_array($dislikes_rs);
+    $rating = [
+        'likes' => $likes[0],
+        'dislikes' => $dislikes[0]
+    ];
+    return json_encode($rating);
+}
+
+// Check if user already likes post or not
+function userLiked($post_id)
+{
+    global $conn;
+    global $user_id;
+    $sql = "SELECT * FROM rating_info WHERE user_id=$user_id 
+  		  AND post_id=$post_id AND rating_action='like'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
