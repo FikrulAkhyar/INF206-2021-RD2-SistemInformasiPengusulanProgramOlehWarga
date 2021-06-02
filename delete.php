@@ -24,4 +24,3 @@ include('config.php');
 }else{
 	echo '<script>alert("ID tidak ditemukan di database."); document.location="kelola_warga.php";</script>';
 }
-?>
