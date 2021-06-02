@@ -1,8 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-session_start();
-require 'config.php';
+require_once 'config.php';
 
 // Memasukkan input data ke dalam variabel
 $nik = mysqli_real_escape_string($conn, $_POST['nik']);
@@ -19,6 +18,7 @@ if ($cek > 0) {
 	$name_user = $row[2];
 	$id_status_user = $row[7];
 	$id_user = $row[0];
+	$no_hp_user = $row[6];
 
 	if (password_verify($password, $pass_user)) {
 
@@ -26,6 +26,7 @@ if ($cek > 0) {
 		$_SESSION["nik"] = $nik_user;
 		$_SESSION["id_status"] = $id_status_user;
 		$_SESSION["name"] = $name_user;
+		$_SESSION["no_hp"] = $no_hp_user;
 
 		if (!empty($_POST["remember"])) {
 			setcookie("user_login", $_POST["nik"], time() + (10 * 365 * 24 * 60 * 60));

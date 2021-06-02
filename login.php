@@ -1,6 +1,10 @@
 <?php
-session_start();
-require 'config.php'; ?>
+include_once "config.php";
+if ($_SESSION["id"]) {
+    header("Location: dashboard");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
