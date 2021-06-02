@@ -74,9 +74,7 @@ if ($_SESSION["id"]) {
                                                 <label class="custom-control-label  font-weight-bold" for="customCheck" style="color: #137F7F">Remember
                                                     Me</label>
                                             </div>
-                                            <div class="text-right" style="flex-wrap: wrap;">
-                                                <a class="small font-weight-bold" style="color: #137F7F" href="#">Forgot Password?</a>
-                                            </div>
+
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-warning font-weight-bold btn-user px-5 btn-block" style="color: black;">
