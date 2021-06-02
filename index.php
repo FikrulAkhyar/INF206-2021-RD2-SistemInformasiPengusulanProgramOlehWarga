@@ -1,5 +1,9 @@
 <?php
 require_once "config.php";
+if ($_SESSION["id"]) {
+    header("Location: dashboard");
+    exit();
+}
 
 $sql = mysqli_query($conn, "SELECT * FROM program");
 ?>
