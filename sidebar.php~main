@@ -1,3 +1,4 @@
+<<<<<<< HEAD:lihat_usulan.php
 <?php
 <<<<<<< HEAD
 require_once "config.php";
@@ -130,6 +131,8 @@ $data = mysqli_query($conn, $query);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
 
+=======
+>>>>>>> main:sidebar.php
 <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -138,7 +141,7 @@ $data = mysqli_query($conn, $query);
             <ul class="navbar-nav bg-gradient-white sidebar sidebar-dark accordion" id="accordionSidebar" style="border: 1px solid #137F7F;">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
                     <img src="img/logo.png" width="90%;">
                 </a>
 
@@ -146,7 +149,7 @@ $data = mysqli_query($conn, $query);
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" style="color: black;" href="#">
+                    <a class="nav-link font-weight-bold" style="color: black;" href="dashboard">
                         <i class="fas fa-home" style="color: #137F7F;"></i>
                         <span>Menu Utama</span></a>
                 </li>
@@ -162,14 +165,20 @@ $data = mysqli_query($conn, $query);
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item font-weight-bold" style="color: black;" href="kelola_warga">Kelola Warga</a>
-                            <a class="collapse-item font-weight-bold" style="color: black;" href="#">Kelola Usulan</a>
+                            <a class="collapse-item font-weight-bold" style="color: black;" href="lihat_usulan">Kelola Usulan</a>
                         </div>
                     </div>
                 </li>
 
                 <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
 
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" style="color: black;" href="peringkat_program">
+                        <i class="fas fa-home" style="color: #137F7F;"></i>
+                        <span>Peringkat Program</span></a>
+                </li>
 
+                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
                 <!-- Nav Item - Logout Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed font-weight-bold" style="color: black;" href="logout">
@@ -178,13 +187,6 @@ $data = mysqli_query($conn, $query);
                     </a>
                 </li>
 
-                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" style="background-color: #137F7F;" id="sidebarToggle"></button>
-                </div>
-
             </ul>
             <!-- End of Sidebar -->
         <?php else : ?>
@@ -192,7 +194,7 @@ $data = mysqli_query($conn, $query);
             <ul class="navbar-nav bg-gradient-white sidebar sidebar-dark accordion" id="accordionSidebar" style="border: 1px solid #137F7F;">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dashboard">
                     <img src="img/logo.png" width="90%;">
                 </a>
 
@@ -200,7 +202,7 @@ $data = mysqli_query($conn, $query);
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" style="color: black;" href="#">
+                    <a class="nav-link font-weight-bold" style="color: black;" href="dashboard">
                         <i class="fas fa-home" style="color: #137F7F;"></i>
                         <span>Menu Utama</span></a>
                 </li>
@@ -216,14 +218,14 @@ $data = mysqli_query($conn, $query);
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item font-weight-bold" style="color: black;" href="Usulan">Kirim Pengajuan</a>
-                            <a class="collapse-item font-weight-bold" style="color: black;" href="#">Riwayat Pengajuan</a>
+                            <a class="collapse-item font-weight-bold" style="color: black;" href="riwayat_usulan">Riwayat Pengajuan</a>
                         </div>
                     </div>
                 </li>
 
                 <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
                 <li class="nav-item">
-                    <a class="nav-link font-weight-bold" style="color: black;" href="#">
+                    <a class="nav-link font-weight-bold" style="color: black;" href="peringkat_program">
                         <i class="fas fa-home" style="color: #137F7F;"></i>
                         <span>Peringkat Program</span></a>
                 </li>
@@ -233,21 +235,15 @@ $data = mysqli_query($conn, $query);
 
                 <!-- Nav Item - Logout Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed font-weight-bold" style="color: black;" href="#">
+                    <a class="nav-link collapsed font-weight-bold" style="color: black;" href="logout">
                         <i class="fas fa-sign-out-alt" style="color: #137F7F;"></i>
                         <span>Logout</span>
                     </a>
                 </li>
 
-                <div class="mx-auto my-2" style="background-color: #137F7F; height:1px; width: 150px;"></div>
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" style="background-color: #137F7F;" id="sidebarToggle"></button>
-                </div>
-
             </ul>
             <!-- End of Sidebar -->
+<<<<<<< HEAD:lihat_usulan.php
         <?php endif; ?>
 
         <!-- Content Wrapper -->
@@ -390,3 +386,6 @@ $data = mysqli_query($conn, $query);
 
 </html>
 >>>>>>> main
+=======
+        <?php endif; ?>
+>>>>>>> main:sidebar.php
