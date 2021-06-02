@@ -128,3 +128,5 @@ $query = mysqli_query($conn, 'SELECT a.*, b.nama FROM usulan as a JOIN user as b
 
 </div>
 <!-- End of Main Content -->
+
+<?php include_once "footer.php"; ?>
