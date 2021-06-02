@@ -14,3 +14,5 @@ if(mysqli_query($conn, "INSERT INTO usulan VALUES('', '$id_user','$judul', '$des
     $popup = "Warning";
     $_SESSION['popup'] = $popup;
 }
+
+header("location:Usulan.php");
