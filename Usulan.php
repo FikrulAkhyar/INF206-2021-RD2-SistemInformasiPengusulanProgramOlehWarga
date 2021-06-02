@@ -47,3 +47,15 @@ include_once "topbar.php";
             </form>
         </div>
     </div>
+    <?php
+    if (isset($_SESSION['popup'])) { ?>
+        <div class="popup" id="popup" data-popup="<?= $_SESSION['popup']; ?>"></div>
+    <?php } else { ?>
+        <div class="popup" id="popup" data-popup=""></div>
+    <?php } ?>
+    <?php unset($_SESSION['popup']); ?>
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
