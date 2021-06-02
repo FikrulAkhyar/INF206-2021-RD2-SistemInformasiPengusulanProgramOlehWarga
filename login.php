@@ -1,6 +1,15 @@
 <?php
+<<<<<<< HEAD
 session_start();
 require 'config.php'; ?>
+=======
+include_once "config.php";
+if ($_SESSION["id"]) {
+    header("Location: dashboard");
+    exit();
+}
+?>
+>>>>>>> 1908107010060
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,9 +79,13 @@ require 'config.php'; ?>
                                                 <label class="custom-control-label  font-weight-bold" for="customCheck" style="color: #137F7F">Remember
                                                     Me</label>
                                             </div>
+<<<<<<< HEAD
                                             <div class="text-right" style="flex-wrap: wrap;">
                                                 <a class="small font-weight-bold" style="color: #137F7F" href="#">Forgot Password?</a>
                                             </div>
+=======
+
+>>>>>>> 1908107010060
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-warning font-weight-bold btn-user px-5 btn-block" style="color: black;">
