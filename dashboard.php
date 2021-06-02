@@ -246,6 +246,39 @@ $jumlah_usulan = mysqli_num_rows($countUsulan);
                         </div>
                     </div>
 
+                    <!-- Peringkat -->
+                    <div class="card text-center pt-5 pb-2 border-0" style="background-color:inherit">
+                        <div>
+                            <h4 class="font-weight-bold" style="color: #137F7F;">TOP 3 USULAN PROGRAM</h4>
+                        </div>
+                    </div>
+                    <?php
+                    $sql = 'select judul from usulan order by jumlah_vote desc limit 3';
+
+                    $query = mysqli_query($conn, $sql);
+                    ?>
+                    <div class="card px-3 border-0 m-auto" style="color: black; max-width:500px;">
+                        <div class="h5 px-3 py-3" style="background-color: #137F7F; color: white; border: 1px solid #137F7F; border-radius: 10px;">
+                            <i class="fas fa-medal" style="color: gold;"></i>
+                            <span>
+                                <?php $row = mysqli_fetch_array($query);
+                                echo $row['judul']; ?>
+                            </span>
+                        </div>
+                        <div class="h5 px-3 py-3" style="background-color: white; border: 1px solid #137F7F; border-radius: 10px;">
+                            <i class="fas fa-medal" style="color: silver;"></i>
+                            <span><?php $row = mysqli_fetch_array($query);
+                                    echo $row['judul']; ?></span>
+                        </div>
+                        <div class="h5 px-3 py-3 mb-5" style="background-color: white; border: 1px solid #137F7F; border-radius: 10px;">
+                            <i class="fas fa-medal" style="color: brown;"></i>
+                            <span><?php $row = mysqli_fetch_array($query);
+                                    echo $row['judul']; ?></span>
+                        </div>
+                    </div>
+
+                    <!-- End of Content -->
+
                     <!-- Footer-->
                     <footer class="footer py-2 text-center" style="color: black; font-weight:bold; background-color: rgba(100, 162, 162, 0.9);">
                         <span>Copyright © RD2 <?= date('Y'); ?></span>
@@ -254,47 +287,51 @@ $jumlah_usulan = mysqli_num_rows($countUsulan);
 
                 </div>
                 <!-- End of Content Wrapper -->
-                <!-- Scroll to Top Button-->
-                <a class="scroll-to-top rounded" href="#page-top">
-                    <i class="fas fa-angle-up"></i>
-                </a>
 
-                <!-- Logout Modal-->
-                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar ?</h5>
-                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">Tekan Logout Untuk Keluar</div>
-                            <div class="modal-footer">
-                                <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
-                                <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="logout">Logout</a>
-                            </div>
+            </div>
+            <!-- End of Page Wrapper -->
+
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Yakin Ingin Keluar ?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Tekan Logout Untuk Keluar</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-warning" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn" style="background-color: rgba(100, 162, 162, 0.9); color:white" href="logout">Logout</a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-                <!-- Bootstrap core JavaScript-->
-                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
-                <script src="js/kirimscript.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+            <script src="js/kirimscript.js"></script>
 
-                <!-- Custom scripts for all pages-->
-                <script src="js/sb-admin-2.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
 
-                <!-- Page level plugins -->
-                <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-                <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-                <!-- Page level custom scripts -->
-                <script src="js/datatables.js"></script>
-                <script src="js/kirimscript.js"></script>
+            <!-- Page level custom scripts -->
+            <script src="js/datatables.js"></script>
+            <script src="js/kirimscript.js"></script>
 </body>
 
 </html>
