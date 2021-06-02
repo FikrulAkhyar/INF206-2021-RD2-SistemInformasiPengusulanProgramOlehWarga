@@ -1,9 +1,5 @@
 <?php 
 include "config.php";
-<<<<<<< HEAD
-session_start();
-=======
->>>>>>> 1908107010060
 
 $id_user = $_SESSION["id"]; 
 $judul = $_POST['judul'];
@@ -20,7 +16,3 @@ if(mysqli_query($conn, "INSERT INTO usulan VALUES('', '$id_user','$judul', '$des
 }
 
 header("location:Usulan.php");
-<<<<<<< HEAD
-?>
-=======
->>>>>>> 1908107010060
