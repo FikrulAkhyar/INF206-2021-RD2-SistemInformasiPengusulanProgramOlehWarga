@@ -83,7 +83,7 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item font-weight-bold" style="color: black;" href="Usulan">Kirim Pengajuan</a>
-                            <a class="collapse-item font-weight-bold" style="color: black;" href="riwayat_usulan">Riwayat Pengajuan</a>
+                            <a class="collapse-item font-weight-bold" style="color: black;" href="riwayat-usulan">Riwayat Pengajuan</a>
                         </div>
                     </div>
                 </li>
