@@ -90,7 +90,7 @@ if ($_SESSION["id"]) {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6" style="background-image: url('img/bg-log.png'); background-size:600px;">
+                        <div class="col-lg-6" style="background-image: url('img/bg-log.png'); background-size:cover;">
                         </div>
                     </div>
                 </div>
