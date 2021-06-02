@@ -35,7 +35,7 @@ $(document).ready(function(){
       });		
     
     });
-
+    
     // if the user clicks on the dislike button ...
     $('.dislike-btn').on('click', function(){
       var post_id = $(this).data('id');
@@ -71,5 +71,5 @@ $(document).ready(function(){
       });	
     
     });
-
-});
+    
+    });
