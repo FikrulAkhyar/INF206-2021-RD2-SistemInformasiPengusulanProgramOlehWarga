@@ -26,5 +26,5 @@
   		$msg = "Failed to upload image";
   	}
   }
-  header('location: Realisasikan.php');
+  header('location: peringkat_program.php');
 ?>
