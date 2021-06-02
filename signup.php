@@ -1,13 +1,9 @@
 <?php
-<<<<<<< HEAD
-session_start();
-=======
 require_once "config.php";
 if ($_SESSION["id"]) {
     header("Location: dashboard");
     exit();
 }
->>>>>>> 1908107010060
 ?>
 
 <!DOCTYPE html>

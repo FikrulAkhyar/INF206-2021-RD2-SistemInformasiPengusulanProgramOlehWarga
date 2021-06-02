@@ -1,9 +1,5 @@
 <?php
 require_once "config.php";
-<<<<<<< HEAD
-session_start();
-=======
->>>>>>> 1908107010060
 
 $nik = htmlspecialchars($_POST["nik"]);
 $cekquery = mysqli_query($conn, "SELECT * FROM user where nik = '$nik'");

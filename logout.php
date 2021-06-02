@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
-session_start();
->>>>>>> 1908107010060
 session_destroy();
 session_start();
 

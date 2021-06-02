@@ -3,18 +3,16 @@ require_once "config.php";
 if (!$_SESSION["id"]) {
     header("Location: login");
     exit();
-} else if ($_SESSION["id_status"] != 1) {
-    header("Location: dashboard");
-    exit();
 }
 
 include_once "header.php";
 include_once "sidebar.php";
 include_once "topbar.php";
-$query = mysqli_query($conn, 'SELECT a.*, b.nama FROM usulan as a JOIN user as b ON a.id_user = b.id order by a.jumlah_vote desc');
+
+$id_user = $_SESSION['id'];
+$query = mysqli_query($conn, "SELECT * FROM usulan WHERE id_user = '$id_user'");
 
 ?>
-
 
 <!-- Content Riwayat Pengusulan-->
 <div class="container-fluid">
@@ -31,7 +29,6 @@ $query = mysqli_query($conn, 'SELECT a.*, b.nama FROM usulan as a JOIN user as b
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 50px;">No</th>
-                            <th>Nama Pengusul</th>
                             <th>Judul</th>
                             <th class="text-center" style="width: 100px;">Jumlah Vote</th>
                             <th class="text-center" style="width: 10px;">Action</th>
@@ -44,15 +41,14 @@ $query = mysqli_query($conn, 'SELECT a.*, b.nama FROM usulan as a JOIN user as b
                         while ($data = mysqli_fetch_array($query)) {
                         ?>
                             <tr>
-                                <td class="text-center"><?= $no; ?></td>
-                                <td><?= $data['nama']; ?></td>
+                                <td class="text-center"><?= $no++; ?></td>
                                 <td><?= $data['judul']; ?></td>
                                 <td class="text-center"><?= $data['jumlah_vote']; ?></td>
-                                <td><a href="hapus_usulan.php?id=<?= $data['id']; ?>" onclick="return confirm('Yakin ingin menghapus data ini?')"><button type="button" class="btn btn-danger">Delete</button></a></td>
-                                <td><button type="button" class="btn" data-toggle="modal" data-target="#detail<?= $no; ?>"><i class="fas fa-arrow-right" style="color: #137F7F"></i></button></td>
+                                <td><a href="hapus_riwayat.php?id=<?= $data['id']; ?>" onclick="return confirm('Yakin ingin menghapus data ini?')"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                                <td><button type="button" class="btn" data-toggle="modal" data-target="#detail"><i class="fas fa-arrow-right" style="color: #137F7F"></i></button></td>
                             </tr>
                             <!-- Modal -->
-                            <div class="modal fade" id="detail<?= $no++; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade" id="detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -63,10 +59,6 @@ $query = mysqli_query($conn, 'SELECT a.*, b.nama FROM usulan as a JOIN user as b
                                         </div>
                                         <div class="modal-body mx-4">
                                             <form>
-                                                <div class="form-group">
-                                                    <label for="nama">Nama Pengusul</label>
-                                                    <input type="text" class="form-control" id="nama" value="<?= $data['nama']; ?>" readonly>
-                                                </div>
                                                 <div class="form-group">
                                                     <label for="judul">Judul Usulan</label>
                                                     <input type="text" class="form-control" id="judul" value="<?= $data['judul']; ?>" readonly>
